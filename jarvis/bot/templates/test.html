@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat Bot UI</title>
+    <link rel="stylesheet" href='C:\laragon\www\project 1.3\project 1.3\css\bootstrap.min.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style>
+        body {
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 0 20px;
+        }
+
+        .chatlogs {
+        padding: 5px;
+        width: 80%;
+        height: 80%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+        .container {
+          border: 2px solid #dedede;
+          background-color: #f1f1f1;
+          border-radius: 5px;
+          padding: 10px;
+          margin: 10px 0;
+        }
+
+        .darker {
+          border-color: #ccc;
+          background-color: #ddd;
+        }
+
+        .container::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        .container img {
+          float: left;
+          max-width: 60px;
+          width: 100%;
+          margin-right: 20px;
+          border-radius: 50%;
+        }
+
+        .container img.right {
+          float: right;
+          margin-left: 20px;
+          margin-right:0;
+        }
+
+        .time-right {
+          float: right;
+          color: #aaa;
+        }
+
+        .time-left {
+          float: left;
+          color: #999;
+        }
+    </style>
+</head>
+<body background="static\Capital-Roasters-Website-background-coffee-beans.jpg">
+    <h2>Chat Messages</h2>
+
+<div id="chatlogs" class="container jumbotron" style="background-color: #795548; height: 450px; overflow: scroll;" >
+    <!-- <div class="chatlogs"> -->
+        <div class="container">
+          <!-- <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;"> -->
+          <p>Hello. How are you today?</p>
+          <span class="time-right">11:00</span>
+        </div>
+
+        <div class="container darker">
+          <!-- <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right" style="width:100%;"> -->
+          <p>Hey! I'm fine. Thanks for asking!</p>
+          <span class="time-right">11:01</span>
+        </div>
+
+        {% for i in Chat1 %}
+        <div class="{% cycle 'container' 'container darker'%}">
+          <!-- <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right" style="width:100%;"> -->
+          <p>{{i}} </p>
+          <span class="time-right">11:01</span>
+        </div>
+        {% endfor %}
+   <!--  </div> -->
+        
+
+</div>
+    
+<div class="container jumbotron" style="background-color: #795548">
+    <form method="POST" action="{% url 'Bot:home' %}">{% csrf_token %}
+        <div class="form-group">
+          <label class="col-lg-2 control-label" style="color: black">Message</label>
+          <div class="col-lg-7">
+            <input type="text" class="form-control" id = "inputDiv" placeholder="Message" name="myvalue">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-6 col-lg-offset-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    window.onload= function(){
+      var a = document.getElementByID("chatlogs");
+      a.scrollTop = a.scrollHeight;
+    }
+</script>
+
+</body>
+</html>

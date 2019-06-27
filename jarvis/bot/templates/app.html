@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Jarvis FlightAgent</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style>
+        body {
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 0 20px;
+        }
+
+        .chatlogs {
+        padding: 5px;
+        width: 80%;
+        height: 80%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+        .container {
+          border: 2px solid #dedede;
+          background-color: #f1f1f1;
+          border-radius: 5px;
+          padding: 10px;
+          margin: 10px 0;
+        }
+
+        .darker {
+          border-color: #ccc;
+          background-color: #ddd;
+        }
+
+        .container::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        .container img {
+          float: left;
+          max-width: 60px;
+          width: 100%;
+          margin-right: 20px;
+          border-radius: 50%;
+        }
+
+        .container img.right {
+          float: right;
+          margin-left: 20px;
+          margin-right:0;
+        }
+
+        .time-right {
+          float: right;
+          color: #aaa;
+        }
+
+        .time-left {
+          float: left;
+          color: #999;
+        }
+    </style>
+</head>
+<body background="Sunrise.jpg">
+    <h2>Jarvis</h2>
+
+<div id="chatlogs" class="container jumbotron" style="background-color: #9480b7; height: 450px; overflow: scroll;" >
+        <div class="container">
+          <p>Hello. How are you today?</p>
+          <span class="time-right">11:00</span>
+        </div>
+
+        <div class="container darker">
+          <p>Hey! I'm fine. Thanks for asking!</p>
+          <span class="time-right">11:01</span>
+        </div>
+
+        {% for response in Chat1 %}
+        <div class="{% cycle 'container' 'container darker'%}">
+          <p>{{response}} </p>
+          <span class="time-right">11:01</span>
+        </div>
+        {% endfor %}
+        
+
+</div>
+ 
+
+ <!-- Input -->   
+<div class="container jumbotron" style="background-color: #9480b7">
+    <form method="POST" action="{% url 'Bot:home' %}">{% csrf_token %}
+        <div class="form-group">
+          <label class="col-lg-2 control-label" style="color: black">Message</label>
+          <div class="col-lg-7">
+            <input type="text" class="form-control" id = "inputDiv" placeholder="Message" name="myvalue">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-6 col-lg-offset-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    window.onload= function(){
+      var a = document.getElementByID("chatlogs");
+      a.scrollTop = a.scrollHeight;
+    }
+</script>
+
+</body>
+</html>
